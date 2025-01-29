@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Consumption Predictor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-image: url('static/images/clean-energy.jpg'); 
+            background-size: cover; 
+            background-position: center;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            font-size: 18px; 
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(30, 30, 30, 0.8); 
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px; 
+        }
+        button {
+            background-color: #6200ea;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px; 
+        }
+        button:hover {
+            background-color: #3700b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Energy Consumption Predictor</h2>
+        <form action="/predict" method="post">
+            <input type="number" name="HomeID" placeholder="Home ID" required>
+            <input type="number" name="Temperature" placeholder="Temperature" required>
+            <input type="number" name="Humidity" placeholder="Humidity" required>
+            <input type="number" name="SquareFootage" placeholder="Square Footage" required>
+            <input type="number" name="RenewableEnergy" placeholder="Renewable Energy (kWh)" required>
+            <select name="Occupancy" required>
+                <option value="">Select Occupancy</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+            <select name="HVACUsage" required>
+                <option value="">Select HVAC Usage</option>
+                <option value="On">On</option>
+                <option value="Off">Off</option>
+            </select>
+            <select name="LightingUsage" required>
+                <option value="">Select Lighting Usage</option>
+                <option value="On">On</option>
+                <option value="Off">Off</option>
+            </select>
+            <select name="DayOfWeek" required>
+                <option value="">Select Day of the Week</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+            </select>
+            <select name="Holiday" required>
+                <option value="">Is it a Holiday?</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+            <button type="submit">Predict</button>
+        </form>
+        {% if prediction_text %}
+            <h3>{{ prediction_text }}</h3>
+        {% endif %}
+    </div>
+</body>
+</html>
